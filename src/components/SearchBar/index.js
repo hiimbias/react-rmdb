@@ -4,6 +4,8 @@ import searchIcon from "../../images/search-icon.svg";
 // Styles
 import { Wrapper, Content } from "./SearchBar.styles";
 
+import PropTypes from 'prop-types';
+
 // SearchBar component không có props, chỉ có setSearchTerm từ useHomeFetch.js, đây là function được truyền từ useHomeFetch.js, do ban đầu không có sẵn function này
 const SearchBar = ({ setSearchTerm }) => {
     const [state, setState] = useState('');//state to hold the value of the input
@@ -42,5 +44,9 @@ const SearchBar = ({ setSearchTerm }) => {
         </Wrapper>
     );
 };
+
+SearchBar.propTypes = {
+    callback : PropTypes.func
+}
 
 export default SearchBar;
