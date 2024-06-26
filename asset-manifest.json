@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.js": "/react-rmdb/static/js/main.1e311f69.js",
+    "main.js": "/react-rmdb/static/js/main.ed6fdc8e.js",
     "static/media/no_image.jpg": "/react-rmdb/static/media/no_image.22d2aa4d1af1a092666a.jpg",
-    "static/media/react-movie-logo.svg": "/react-rmdb/static/media/react-movie-logo.42955eb6fcd32d2d228d0634c7cb7804.svg",
-    "static/media/tmdb_logo.svg": "/react-rmdb/static/media/tmdb_logo.f15b66321d9915689a58f8372fa02398.svg",
+    "static/media/react-movie-logo.svg": "/react-rmdb/static/media/react-movie-logo.35f4d3992dd78df53bd6341f2e4eb9ea.svg",
+    "static/media/tmdb_logo.svg": "/react-rmdb/static/media/tmdb_logo.e702996172bd09ab29699209042fdf7e.svg",
     "index.html": "/react-rmdb/index.html",
-    "static/media/search-icon.svg": "/react-rmdb/static/media/search-icon.cd820f5a55f7cd57d7131f1672d43473.svg",
-    "main.1e311f69.js.map": "/react-rmdb/static/js/main.1e311f69.js.map"
+    "static/media/search-icon.svg": "/react-rmdb/static/media/search-icon.bb4c697fafd776173d5d5a022bcd9c34.svg",
+    "main.ed6fdc8e.js.map": "/react-rmdb/static/js/main.ed6fdc8e.js.map"
   },
   "entrypoints": [
-    "static/js/main.1e311f69.js"
+    "static/js/main.ed6fdc8e.js"
   ]
 }
