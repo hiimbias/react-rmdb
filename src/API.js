@@ -70,6 +70,25 @@ const apiSettings = {
     ).json();
 
     return rating;
+  },
+
+  fetchMoviesByGenre: async (genreId, page = 1) => {
+    const endpoint = `${API_URL}discover/movie?api_key=${API_KEY}&with_genres=${genreId}&page=${page}`;
+    return await (await fetch(endpoint)).json();
+  },
+
+  fetchSimilarMovies: async (movieId) => {
+    const endpoint = `${API_URL}movie/${movieId}/similar?api_key=${API_KEY}`;
+    return await (await fetch(endpoint)).json();
+  },
+
+  fetchGenres: async () => {
+    const endpoint = `${API_URL}genre/movie/list?api_key=${API_KEY}&language=en-US`;
+    return await (await fetch(endpoint)).json();
+  },
+  fetchRecommendations: async (movieId) => {
+    const endpoint = `${API_URL}movie/${movieId}/recommendations?api_key=${API_KEY}`;
+    return await (await fetch(endpoint)).json();
   }
 };
 

@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 const Thumb = ({ image, movieId, clickable }) => (
     <div>
         {clickable ? (
-            <Link to={`/${movieId}`}>
+            <Link to={`/react-rmdb/${movieId}`}>
                 <Image src={image} alt='movie-thumb' />
             </Link>
         ) : (

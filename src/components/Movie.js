@@ -1,58 +1,113 @@
-import React from "react";
+import React, { Component } from "react"; 
 import { useParams } from "react-router-dom";
+import API from '../API';
+
 // Config
 import { IMAGE_BASE_URL, POSTER_SIZE } from '../config';
 
-//Components
+// Components
 import BreadCrumb from './BreadCrumb';
 import Grid from './Grid';
 import Spinner from './Spinner';
 import MovieInfo from './MovieInfo';
 import MovieInfoBar from './MovieInfoBar';
 import Actor from "./Actor";
-//Hook 
-import { useMovieFetch } from "../hooks/useMovieFetch";
+import MovieRecommendations from './MovieRecommendations'; // Import movie recommendations
 
-//Image
+// Image
 import NoImage from '../images/no_image.jpg';
 
 
-const Movie = () => {
 
-    const { movieId } = useParams(); 
-    // useParams will active when the route is /:movieId
-    // useParams is a hook that returns an object of key/value pairs of URL parameters. Use it to access match.params of the current <Route>.
-    const { state: movie , loading, error } = useMovieFetch(movieId); 
-    //fetch data needed and return object with 3 props: state, loading, error from the useMovieFetch hook
-    if (loading) return <Spinner />;
-    if (error) return <div>Something went wrong...</div>;
+class Movie extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            movie: {},
+            loading: true,
+            error: false,
+        };
+    }
 
-    console.log(movie);
-    
-    return (
-        <>
-            <BreadCrumb movieTitle={movie.original_title} />
-            <MovieInfo movie={movie} />
-            <MovieInfoBar time={movie.runtime} 
-            budget={movie.budget} 
-            revenue={movie.revenue} />
+    fetchMovie = async () => {
+        const { movieId } = this.props; // Lấy movieId từ props
+        try {
+            this.setState({ error: false, loading: true });
 
-            <Grid header='Actors'>
-                {movie.actors.map(actor => (
-                    <Actor
-                        key = {actor.credit_id}
-                        name = {actor.name}
-                        character = {actor.character}
-                        imageUrl = {
-                            actor.profile_path
-                            ? `${IMAGE_BASE_URL}${POSTER_SIZE}${actor.profile_path}`
-                            : NoImage
-                        }
-                    />
-                ))}
-            </Grid>
-        </>
-    )
+            const movie = await API.fetchMovie(movieId);
+            const credits = await API.fetchCredits(movieId);
+
+            // Get directors only
+            const directors = credits.crew.filter(
+                member => member.job === 'Director'
+            );
+
+            this.setState({
+                movie: {
+                    ...movie,
+                    actors: credits.cast,
+                    directors
+                },
+                loading: false,
+            });
+
+        } catch (error) {
+            this.setState({ error: true, loading: false });
+        }
+    }
+
+    componentDidMount() {
+        this.fetchMovie();
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.movieId !== this.props.movieId) {
+            this.fetchMovie();
+        }
+    }
+
+    render() {
+        const { movie, loading, error } = this.state;
+
+        if (loading) return <Spinner />;
+        if (error) return <div>Something went wrong...</div>;
+
+        return (
+            <>
+                <BreadCrumb movieTitle={movie.original_title} />
+                <MovieInfo movie={movie} />
+                <MovieInfoBar 
+                    time={movie.runtime} 
+                    budget={movie.budget} 
+                    revenue={movie.revenue} 
+                />
+
+                <Grid header="Actors">
+                    {movie.actors?.map(actor => (
+                        <Actor
+                            key={actor.credit_id}
+                            name={actor.name}
+                            character={actor.character}
+                            imageUrl={
+                                actor.profile_path
+                                    ? `${IMAGE_BASE_URL}${POSTER_SIZE}${actor.profile_path}`
+                                    : NoImage
+                            }
+                        />
+                    ))}
+                </Grid>
+
+                <MovieRecommendations movieGenres={movie.genres} />
+            </>
+        );
+    }
 }
 
-export default Movie;
+// Truyền movieId từ useParams() vào Movie
+const MovieWithParams = () => {
+    const { movieId } = useParams();
+    return <Movie movieId={movieId} />;
+};
+
+export default MovieWithParams;
+

@@ -16,8 +16,8 @@ const App = () => (
       <Header />
       <Routes>
         <Route path='/react-rmdb' element={<Home />}/>
-        <Route path='/:movieId' element={<Movie/>} />
-        <Route path='/*' element={<NotFound/>} />
+        <Route path='/react-rmdb/:movieId' element={<Movie/>} />
+        <Route path='/*' element={<Home />} />
       </Routes>
       {/* //Routes is a component that we use to define the routes of our application. Inside the Routes component, we define the routes using the Route component. The Route component has two props: path and element. The path prop is the URL path that we want to match, and the element prop is the component that we want to render when the path matches. */}
       <GlobalStyle />
