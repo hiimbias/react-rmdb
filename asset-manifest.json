@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.js": "/react-rmdb/static/js/main.ab6bf0b2.js",
+    "static/media/no_image.jpg": "/react-rmdb/static/media/no_image.22d2aa4d1af1a092666a.jpg",
+    "static/media/react-movie-logo.svg": "/react-rmdb/static/media/react-movie-logo.35f4d3992dd78df53bd6341f2e4eb9ea.svg",
+    "static/media/tmdb_logo.svg": "/react-rmdb/static/media/tmdb_logo.e702996172bd09ab29699209042fdf7e.svg",
+    "index.html": "/react-rmdb/index.html",
+    "static/media/search-icon.svg": "/react-rmdb/static/media/search-icon.bb4c697fafd776173d5d5a022bcd9c34.svg",
+    "main.ab6bf0b2.js.map": "/react-rmdb/static/js/main.ab6bf0b2.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.ab6bf0b2.js"
+  ]
+}
